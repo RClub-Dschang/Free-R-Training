@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="D2_files/libs/revealjs/dist/theme/quarto.css">
   <link href="D2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -329,7 +394,7 @@
 
 <section id="title-slide" data-background-opacity="0.2" class="quarto-title-block center">
   <h1 class="title">The Basics of R Programming - D2</h1>
-  <p class="subtitle">Online Workshop By R-Club University of Dschang &amp; PytoCaR</p>
+  <p class="subtitle">Online Workshop By R-Club UDs &amp; PytoCaR</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -349,15 +414,27 @@ Juluis Foyet
 <ul>
 <li><a href="#/data-structure-and-type" id="/toc-data-structure-and-type"><span class="header-section-number">1</span> Data Structure and Type</a>
 <ul>
-<li><a href="#/data-structure" id="/toc-data-structure"><span class="header-section-number">1.1</span> Data Structure</a></li>
+<li><a href="#/data-structure" id="/toc-data-structure"><span class="header-section-number">1.1</span> Data Structure</a>
+<ul>
+<li><a href="#/data-structure" id="/toc-vectors"><span class="header-section-number">1.1.1</span> Vectors</a></li>
+<li><a href="#/data-structure" id="/toc-matrices"><span class="header-section-number">1.1.2</span> Matrices</a></li>
+<li><a href="#/data-structure" id="/toc-arrays"><span class="header-section-number">1.1.3</span> Arrays</a></li>
+<li><a href="#/data-structure" id="/toc-data-frames-tibbles"><span class="header-section-number">1.1.4</span> Data frames / Tibbles</a></li>
+<li><a href="#/data-structure" id="/toc-lists"><span class="header-section-number">1.1.5</span> Lists</a></li>
+</ul></li>
 <li><a href="#/data-type" id="/toc-data-type"><span class="header-section-number">1.2</span> Data Type</a></li>
 </ul></li>
 <li><a href="#/packages" id="/toc-packages"><span class="header-section-number">2</span> Packages</a>
 <ul>
 <li><a href="#/packages-definition" id="/toc-packages-definition"><span class="header-section-number">2.1</span> Packages Definition</a></li>
 <li><a href="#/packages-installation" id="/toc-packages-installation"><span class="header-section-number">2.2</span> Packages Installation</a></li>
-<li><a href="#/packages-loading" id="/toc-packages-loading"><span class="header-section-number">2.3</span> Packages Loading</a></li>
-<li><a href="#/packages-documentation" id="/toc-packages-documentation"><span class="header-section-number">2.4</span> Packages Documentation</a></li>
+<li><a href="#/working-with-packages" id="/toc-working-with-packages"><span class="header-section-number">2.3</span> Working with Packages</a>
+<ul>
+<li><a href="#/working-with-packages" id="/toc-loading"><span class="header-section-number">2.3.1</span> Loading</a></li>
+<li><a href="#/working-with-packages" id="/toc-getting-citation-of-a-package"><span class="header-section-number">2.3.2</span> Getting citation of a package</a></li>
+</ul></li>
+<li><a href="#/checking-of-loaded-packages" id="/toc-checking-of-loaded-packages"><span class="header-section-number">2.4</span> Checking of loaded packages</a></li>
+<li><a href="#/packages-documentation" id="/toc-packages-documentation"><span class="header-section-number">2.5</span> Packages Documentation</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -370,29 +447,1133 @@ Juluis Foyet
 <section id="data-structure" class="slide level2 smaller" data-number="1.1">
 <h2><span class="header-section-number">1.1</span> Data Structure</h2>
 <p>In R, there are many data structures, each supporting a certain number of operations.</p>
+<h3 data-number="1.1.1" id="vectors"><span class="header-section-number">1.1.1</span> Vectors</h3>
+<p>1-D objects with items of the same type.</p>
+<p><strong>e.g.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">print</span>(glyc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.01 0.83 1.05 1.15 0.99 1.02 1.07 1.00 1.19 0.96 1.05 1.12 0.94 0.96 0.81
+[16] 0.81 0.83 1.18 1.20 1.15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">class</span>(glyc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">print</span>(status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
+[13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">class</span>(status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<h3 data-number="1.1.2" id="matrices"><span class="header-section-number">1.1.2</span> Matrices</h3>
+<p>A matrix is a 2-D object with items of the same type.</p>
+<p><strong>e.g.</strong></p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">print</span>(mat1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   34   29
+[2,]   76   87</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">class</span>(mat1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "matrix" "array" </code></pre>
+</div>
+</div>
+</div><div class="column">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">print</span>(mat2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Disease_status
+Sex      Infected NonInfected
+  Male         34          29
+  Female       76          87</code></pre>
+</div>
+</div>
+</div></div>
+<h3 data-number="1.1.3" id="arrays"><span class="header-section-number">1.1.3</span> Arrays</h3>
+<p>n-D object with items of the same type</p>
+<p><strong>e.g.</strong> Disease status and sleeping time in pregnant and non-pregnant women</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Status</th>
+<th style="text-align: left;">Before 10</th>
+<th style="text-align: center;">10 and later</th>
+<th style="text-align: center;">Before 10</th>
+<th style="text-align: center;">10 and later</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Positive</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">36</td>
+</tr>
+<tr class="even">
+<td>Negative</td>
+<td style="text-align: left;">35</td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62</td>
+</tr>
+</tbody>
+</table>
+<p>R will display the same array as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">print</span>(MyArray)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , Pregnancy = Pregnant
+
+              Sleeping_time
+Disease_status Before 10 10 and later
+      Positive        12           32
+      Negative        35           58
+
+, , Pregnancy = No-Pregnant
+
+              Sleeping_time
+Disease_status Before 10 10 and later
+      Positive        25           36
+      Negative        80           62</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">class</span>(MyArray)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "array"</code></pre>
+</div>
+</div>
+<h3 data-number="1.1.4" id="data-frames-tibbles"><span class="header-section-number">1.1.4</span> Data frames / Tibbles</h3>
+<p>2-D objects with column that can assume different data types.</p>
+<p><strong>e.g.</strong></p>
+<div class="columns">
+<div class="column" style="width:32%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">head</span>(iris[,<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Petal.Length Petal.Width Species
+1          1.4         0.2  setosa
+2          1.4         0.2  setosa
+3          1.3         0.2  setosa
+4          1.5         0.2  setosa
+5          1.4         0.2  setosa
+6          1.7         0.4  setosa</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:68%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">glimpse</span>(iris) <span class="co"># glimpse function found under the package {dplyr}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 150
+Columns: 5
+$ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.…
+$ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.…
+$ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.…
+$ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.…
+$ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…</code></pre>
+</div>
+</div>
+</div></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">class</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Tibbles?</p>
+</div>
+</div>
+</div>
+<h3 data-number="1.1.5" id="lists"><span class="header-section-number">1.1.5</span> Lists</h3>
+<p>A list is an object that can contain any other type of object, including other lists (therefore referred to as recursive objects).</p>
+<p><strong>e.g.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">print</span>(MyList)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$glyc
+ [1] 1.01 0.83 1.05 1.15 0.99 1.02 1.07 1.00 1.19 0.96 1.05 1.12 0.94 0.96 0.81
+[16] 0.81 0.83 1.18 1.20 1.15
+
+$status
+ [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
+[13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+
+$mat2
+        Disease_status
+Sex      Infected NonInfected
+  Male         34          29
+  Female       76          87
+
+$MyArray
+, , Pregnancy = Pregnant
+
+              Sleeping_time
+Disease_status Before 10 10 and later
+      Positive        12           32
+      Negative        35           58
+
+, , Pregnancy = No-Pregnant
+
+              Sleeping_time
+Disease_status Before 10 10 and later
+      Positive        25           36
+      Negative        80           62
+
+
+$iris
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1           5.1         3.5          1.4         0.2  setosa
+2           4.9         3.0          1.4         0.2  setosa
+3           4.7         3.2          1.3         0.2  setosa
+4           4.6         3.1          1.5         0.2  setosa
+5           5.0         3.6          1.4         0.2  setosa
+6           5.4         3.9          1.7         0.4  setosa
+7           4.6         3.4          1.4         0.3  setosa
+8           5.0         3.4          1.5         0.2  setosa
+9           4.4         2.9          1.4         0.2  setosa
+10          4.9         3.1          1.5         0.1  setosa</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">class</span>(MyList)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Relevance of Lists?</p>
+</div>
+</div>
+</div>
 </section>
-<section id="data-type" class="slide level2" data-number="1.2">
+<section id="data-type" class="slide level2 smaller" data-number="1.2">
 <h2><span class="header-section-number">1.2</span> Data Type</h2>
+<div class="columns">
+<div class="column">
+<div class="cell" data-fig-width="5.2" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-simple" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<svg width="499" height="480" viewbox="0.00 0.00 306.51 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-184 302.51,-184 302.51,4 -4,4"></polygon>
+<!-- Variables -->
+<g id="node1" class="node">
+<title>Variables</title>
+<ellipse fill="none" stroke="black" cx="118.94" cy="-162" rx="48.08" ry="18"></ellipse>
+<text text-anchor="middle" x="118.94" y="-157.8" font-family="Times,serif" font-size="14.00">Variables</text>
+</g>
+<!-- Qualitative -->
+<g id="node2" class="node">
+<title>Qualitative</title>
+<ellipse fill="none" stroke="black" cx="53.94" cy="-90" rx="53.88" ry="18"></ellipse>
+<text text-anchor="middle" x="53.94" y="-85.8" font-family="Times,serif" font-size="14.00">Qualitative</text>
+</g>
+<!-- Variables&#45;&#45;Qualitative -->
+<g id="edge1" class="edge">
+<title>Variables--Qualitative</title>
+<path fill="none" stroke="black" d="M103.87,-144.76C93.51,-133.62 79.82,-118.87 69.39,-107.63"></path>
+</g>
+<!-- Quantitative -->
+<g id="node3" class="node">
+<title>Quantitative</title>
+<ellipse fill="none" stroke="black" cx="184.94" cy="-90" rx="58.54" ry="18"></ellipse>
+<text text-anchor="middle" x="184.94" y="-85.8" font-family="Times,serif" font-size="14.00">Quantitative</text>
+</g>
+<!-- Variables&#45;&#45;Quantitative -->
+<g id="edge2" class="edge">
+<title>Variables--Quantitative</title>
+<path fill="none" stroke="black" d="M134.25,-144.76C144.76,-133.62 158.67,-118.87 169.26,-107.63"></path>
+</g>
+<!-- Discrete -->
+<g id="node4" class="node">
+<title>Discrete</title>
+<ellipse fill="none" stroke="black" cx="125.94" cy="-18" rx="43.42" ry="18"></ellipse>
+<text text-anchor="middle" x="125.94" y="-13.8" font-family="Times,serif" font-size="14.00">Discrete</text>
+</g>
+<!-- Quantitative&#45;&#45;Discrete -->
+<g id="edge3" class="edge">
+<title>Quantitative--Discrete</title>
+<path fill="none" stroke="black" d="M170.96,-72.41C161.55,-61.25 149.21,-46.6 139.82,-35.47"></path>
+</g>
+<!-- Continuous -->
+<g id="node5" class="node">
+<title>Continuous</title>
+<ellipse fill="none" stroke="black" cx="242.94" cy="-18" rx="55.65" ry="18"></ellipse>
+<text text-anchor="middle" x="242.94" y="-13.8" font-family="Times,serif" font-size="14.00">Continuous</text>
+</g>
+<!-- Quantitative&#45;&#45;Continuous -->
+<g id="edge4" class="edge">
+<title>Quantitative--Continuous</title>
+<path fill="none" stroke="black" d="M198.69,-72.41C207.93,-61.25 220.07,-46.6 229.29,-35.47"></path>
+</g>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Types of data (Adapted from Bluman, 2023)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Variables</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Qualitative variables
+<ul>
+<li>Categorical</li>
+<li>Ordinal</li>
+<li>Binary</li>
+<li>Boolean/logical</li>
+<li>Factor?</li>
+</ul></li>
+<li>Quantitative variables
+<ul>
+<li>Discrete</li>
+<li>continuous/double</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+<p><strong>e.g.</strong> To obtain the data type in R, use the function <code>class(var)</code>, with <code>var</code> being the name of the variable.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 38%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>Preview</th>
+<th style="text-align: center;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>quarter</td>
+<td>Bunduma, Sandpit, Molyko</td>
+<td style="text-align: center;">character</td>
+</tr>
+<tr class="even">
+<td>quarter2</td>
+<td>Bunduma, Sandpit, Molyko</td>
+<td style="text-align: center;">factor</td>
+</tr>
+<tr class="odd">
+<td>educ</td>
+<td>University, Primary, Secondary</td>
+<td style="text-align: center;">ordered, factor</td>
+</tr>
+<tr class="even">
+<td>status</td>
+<td>TRUE, TRUE, TRUE, TRUE</td>
+<td style="text-align: center;">logical</td>
+</tr>
+<tr class="odd">
+<td>status2</td>
+<td>1, 0, 0, 0, 0, 1, 0, 0, 0, 1</td>
+<td style="text-align: center;">numeric</td>
+</tr>
+<tr class="even">
+<td>glyc</td>
+<td>1.01, 0.83, 1.05, 1.15, 0.99, 1.02</td>
+<td style="text-align: center;">numeric</td>
+</tr>
+<tr class="odd">
+<td>birds</td>
+<td>92, 22, 43, 69, 47, 5, 30, 29</td>
+<td style="text-align: center;">integer</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Assignment</strong>: For each variable in the data frame below, determine the variable type.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tyvcraqxjq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tyvcraqxjq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tyvcraqxjq thead, #tyvcraqxjq tbody, #tyvcraqxjq tfoot, #tyvcraqxjq tr, #tyvcraqxjq td, #tyvcraqxjq th {
+  border-style: none;
+}
+
+#tyvcraqxjq p {
+  margin: 0;
+  padding: 0;
+}
+
+#tyvcraqxjq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tyvcraqxjq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tyvcraqxjq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tyvcraqxjq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tyvcraqxjq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tyvcraqxjq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tyvcraqxjq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tyvcraqxjq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tyvcraqxjq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tyvcraqxjq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tyvcraqxjq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tyvcraqxjq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tyvcraqxjq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tyvcraqxjq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tyvcraqxjq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tyvcraqxjq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tyvcraqxjq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tyvcraqxjq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tyvcraqxjq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tyvcraqxjq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tyvcraqxjq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tyvcraqxjq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tyvcraqxjq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tyvcraqxjq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tyvcraqxjq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tyvcraqxjq .gt_left {
+  text-align: left;
+}
+
+#tyvcraqxjq .gt_center {
+  text-align: center;
+}
+
+#tyvcraqxjq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tyvcraqxjq .gt_font_normal {
+  font-weight: normal;
+}
+
+#tyvcraqxjq .gt_font_bold {
+  font-weight: bold;
+}
+
+#tyvcraqxjq .gt_font_italic {
+  font-style: italic;
+}
+
+#tyvcraqxjq .gt_super {
+  font-size: 65%;
+}
+
+#tyvcraqxjq .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tyvcraqxjq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tyvcraqxjq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tyvcraqxjq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tyvcraqxjq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tyvcraqxjq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tyvcraqxjq .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tyvcraqxjq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tyvcraqxjq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="ID" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ID</th>
+<th id="bmi" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">bmi</th>
+<th id="age" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">age</th>
+<th id="height" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">height</th>
+<th id="weight" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">weight</th>
+<th id="hh_size" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">hh_size</th>
+<th id="h_employe" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">h_employe</th>
+<th id="sex" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">sex</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="ID">1</td>
+<td class="gt_row gt_right" headers="bmi">35.2</td>
+<td class="gt_row gt_right" headers="age">45</td>
+<td class="gt_row gt_right" headers="height">157.2</td>
+<td class="gt_row gt_right" headers="weight">92.0</td>
+<td class="gt_row gt_right" headers="hh_size">4</td>
+<td class="gt_row gt_left" headers="h_employe">Employee</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="ID">2</td>
+<td class="gt_row gt_right" headers="bmi">37.3</td>
+<td class="gt_row gt_right" headers="age">2</td>
+<td class="gt_row gt_right" headers="height">169.9</td>
+<td class="gt_row gt_right" headers="weight">77.9</td>
+<td class="gt_row gt_right" headers="hh_size">3</td>
+<td class="gt_row gt_left" headers="h_employe">Employee</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="ID">3</td>
+<td class="gt_row gt_right" headers="bmi">37.7</td>
+<td class="gt_row gt_right" headers="age">21</td>
+<td class="gt_row gt_right" headers="height">157.9</td>
+<td class="gt_row gt_right" headers="weight">66.0</td>
+<td class="gt_row gt_right" headers="hh_size">1</td>
+<td class="gt_row gt_left" headers="h_employe">Employee</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="ID">4</td>
+<td class="gt_row gt_right" headers="bmi">48.7</td>
+<td class="gt_row gt_right" headers="age">35</td>
+<td class="gt_row gt_right" headers="height">174.9</td>
+<td class="gt_row gt_right" headers="weight">97.6</td>
+<td class="gt_row gt_right" headers="hh_size">1</td>
+<td class="gt_row gt_left" headers="h_employe">Self_employed</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="ID">5</td>
+<td class="gt_row gt_right" headers="bmi">44.7</td>
+<td class="gt_row gt_right" headers="age">9</td>
+<td class="gt_row gt_right" headers="height">175.1</td>
+<td class="gt_row gt_right" headers="weight">117.9</td>
+<td class="gt_row gt_right" headers="hh_size">2</td>
+<td class="gt_row gt_left" headers="h_employe">Self_employed</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="ID">6</td>
+<td class="gt_row gt_right" headers="bmi">49.9</td>
+<td class="gt_row gt_right" headers="age">59</td>
+<td class="gt_row gt_right" headers="height">176.4</td>
+<td class="gt_row gt_right" headers="weight">109.4</td>
+<td class="gt_row gt_right" headers="hh_size">2</td>
+<td class="gt_row gt_left" headers="h_employe">Self_employed</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="ID">7</td>
+<td class="gt_row gt_right" headers="bmi">28.6</td>
+<td class="gt_row gt_right" headers="age">68</td>
+<td class="gt_row gt_right" headers="height">161.3</td>
+<td class="gt_row gt_right" headers="weight">95.0</td>
+<td class="gt_row gt_right" headers="hh_size">2</td>
+<td class="gt_row gt_left" headers="h_employe">Self_employed</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="ID">8</td>
+<td class="gt_row gt_right" headers="bmi">46.2</td>
+<td class="gt_row gt_right" headers="age">14</td>
+<td class="gt_row gt_right" headers="height">171.5</td>
+<td class="gt_row gt_right" headers="weight">104.3</td>
+<td class="gt_row gt_right" headers="hh_size">3</td>
+<td class="gt_row gt_left" headers="h_employe">Self_employed</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="ID">9</td>
+<td class="gt_row gt_right" headers="bmi">21.5</td>
+<td class="gt_row gt_right" headers="age">13</td>
+<td class="gt_row gt_right" headers="height">164.5</td>
+<td class="gt_row gt_right" headers="weight">114.3</td>
+<td class="gt_row gt_right" headers="hh_size">3</td>
+<td class="gt_row gt_left" headers="h_employe">Self_employed</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="ID">10</td>
+<td class="gt_row gt_right" headers="bmi">32.1</td>
+<td class="gt_row gt_right" headers="age">48</td>
+<td class="gt_row gt_right" headers="height">179.5</td>
+<td class="gt_row gt_right" headers="weight">69.9</td>
+<td class="gt_row gt_right" headers="hh_size">3</td>
+<td class="gt_row gt_left" headers="h_employe">Self_employed</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="ID">11</td>
+<td class="gt_row gt_right" headers="bmi">33.7</td>
+<td class="gt_row gt_right" headers="age">58</td>
+<td class="gt_row gt_right" headers="height">175.7</td>
+<td class="gt_row gt_right" headers="weight">76.9</td>
+<td class="gt_row gt_right" headers="hh_size">2</td>
+<td class="gt_row gt_left" headers="h_employe">Self_employed</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="ID">12</td>
+<td class="gt_row gt_right" headers="bmi">22.2</td>
+<td class="gt_row gt_right" headers="age">40</td>
+<td class="gt_row gt_right" headers="height">171.6</td>
+<td class="gt_row gt_right" headers="weight">110.1</td>
+<td class="gt_row gt_right" headers="hh_size">1</td>
+<td class="gt_row gt_left" headers="h_employe">Employee</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="ID">13</td>
+<td class="gt_row gt_right" headers="bmi">27.2</td>
+<td class="gt_row gt_right" headers="age">16</td>
+<td class="gt_row gt_right" headers="height">176.8</td>
+<td class="gt_row gt_right" headers="weight">117.5</td>
+<td class="gt_row gt_right" headers="hh_size">4</td>
+<td class="gt_row gt_left" headers="h_employe">Employee</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="ID">14</td>
+<td class="gt_row gt_right" headers="bmi">28.8</td>
+<td class="gt_row gt_right" headers="age">15</td>
+<td class="gt_row gt_right" headers="height">170.4</td>
+<td class="gt_row gt_right" headers="weight">65.6</td>
+<td class="gt_row gt_right" headers="hh_size">2</td>
+<td class="gt_row gt_left" headers="h_employe">Employee</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section></section>
 <section>
-<section id="packages" class="title-slide slide level1 center" data-number="2">
+<section id="packages" class="title-slide slide level1 smaller center" data-number="2">
 <h1><span class="header-section-number">2</span> Packages</h1>
 
 </section>
 <section id="packages-definition" class="slide level2" data-number="2.1">
 <h2><span class="header-section-number">2.1</span> Packages Definition</h2>
+<p><strong>R packages</strong> are a collection of R functions, compiled code and sample data.</p>
+<p><strong>R packages</strong> enables users to perform some tasks/analyses in an easier way.</p>
+<p>Example of <em>mean standard error</em> and <em>geometric mean</em>?</p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/pckgs.jpg"></p>
+<figcaption>Diversity of packages</figcaption>
+</figure>
+</div>
+</div><div class="column">
+<ul>
+<li>There are already 10k+ packages on CRAN.</li>
+</ul>
+</div></div>
+<ul>
+<li><strong>Some generic packages</strong>: <code>readxl</code>, <code>tidyverse</code>, <code>nortest</code>, <code>DescTools</code>, <code>freqtables</code>, <code>foreign</code>, etc.</li>
+<li><strong>Epidemiology</strong>: <code>Epi</code> , <code>epibasix</code> , <code>epiDisplay</code> , <code>epiR</code>, <code>epitools</code>, etc.</li>
+<li><strong>Biodiversity studies</strong>: <code>BiodiversityR</code>, <code>vegan</code>, <code>iNEXT</code>, etc.</li>
+<li>etc.</li>
+</ul>
 </section>
-<section id="packages-installation" class="slide level2" data-number="2.2">
+<section id="packages-installation" class="slide level2 scrollable" data-number="2.2">
 <h2><span class="header-section-number">2.2</span> Packages Installation</h2>
+<ol type="1">
+<li>From CRAN</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"package_name"</span>)</span>
+<span id="cb29-2"><a href=""></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"package1"</span>, <span class="st">"package2"</span>, <span class="st">"packageN"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Manual installation</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="co"># After downloading the zip,</span></span>
+<span id="cb30-2"><a href=""></a><span class="fu">install.packages</span>(file_name_with_path, <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">"source"</span>) </span>
+<span id="cb30-3"><a href=""></a><span class="co"># e.g. install the package named "XML“</span></span>
+<span id="cb30-4"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"E:/XML_3.98-1.3.zip"</span>, <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">"source"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Dependencies and conflicts?</p>
+</div>
+</div>
+</div>
+<p><strong>Assignment</strong>: Copy and run the following code chunck</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"readxl"</span>, <span class="st">"tidyverse"</span>, <span class="st">"nortest"</span>,</span>
+<span id="cb31-2"><a href=""></a>                   <span class="st">"DescTools"</span>, <span class="st">"freqtables"</span>, <span class="st">"foreign"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="packages-loading" class="slide level2" data-number="2.3">
-<h2><span class="header-section-number">2.3</span> Packages Loading</h2>
+<section id="working-with-packages" class="slide level2" data-number="2.3">
+<h2><span class="header-section-number">2.3</span> Working with Packages</h2>
+<h3 data-number="2.3.1" id="loading"><span class="header-section-number">2.3.1</span> Loading</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">library</span>(“package_name”) <span class="co"># or without quotes</span></span>
+<span id="cb32-2"><a href=""></a><span class="fu">require</span>(“package_name”) <span class="co"># or without quotes</span></span>
+<span id="cb32-3"><a href=""></a><span class="fu">lapply</span>(x, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>) <span class="co"># x being a vector of pckgs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<h3 data-number="2.3.2" id="getting-citation-of-a-package"><span class="header-section-number">2.3.2</span> Getting citation of a package</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">citation</span>(“package_name”)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>e.g.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">citation</span>(<span class="st">"ggplot2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>To cite ggplot2 in publications, please use
+
+  H. Wickham. ggplot2: Elegant Graphics for Data Analysis.
+  Springer-Verlag New York, 2016.
+
+A BibTeX entry for LaTeX users is
+
+  @Book{,
+    author = {Hadley Wickham},
+    title = {ggplot2: Elegant Graphics for Data Analysis},
+    publisher = {Springer-Verlag New York},
+    year = {2016},
+    isbn = {978-3-319-24277-4},
+    url = {https://ggplot2.tidyverse.org},
+  }</code></pre>
+</div>
+</div>
 </section>
-<section id="packages-documentation" class="slide level2" data-number="2.4">
-<h2><span class="header-section-number">2.4</span> Packages Documentation</h2>
+<section id="checking-of-loaded-packages" class="slide level2" data-number="2.4">
+<h2><span class="header-section-number">2.4</span> Checking of loaded packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">search</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] ".GlobalEnv"        "package:knitr"     "package:lubridate"
+ [4] "package:forcats"   "package:stringr"   "package:dplyr"    
+ [7] "package:purrr"     "package:readr"     "package:tidyr"    
+[10] "package:tibble"    "package:ggplot2"   "package:tidyverse"
+[13] "package:gt"        "package:stats"     "package:graphics" 
+[16] "package:grDevices" "package:utils"     "package:datasets" 
+[19] "package:methods"   "Autoloads"         "package:base"     </code></pre>
+</div>
+</div>
+</section>
+<section id="packages-documentation" class="slide level2 scrollable" data-number="2.5">
+<h2><span class="header-section-number">2.5</span> Packages Documentation</h2>
+<p>There are several ways to get help for a package:</p>
+<ol type="1">
+<li><p>The official manual on CRAN website (<a href="https://cran.r-project.org/">https://cran.r-project.org/</a>)</p></li>
+<li><p>The package index</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="fu">help</span>(<span class="at">package =</span> <span class="st">"package_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>Bonus</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">apropos</span>(“part_of_the_name”) <span class="co"># Useful when you are not sure</span></span>
+<span id="cb39-2"><a href=""></a>                            <span class="co"># of the name of the function.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>The Basics of R Programming</p>
+
 </div>
 </div>
 </section></section>

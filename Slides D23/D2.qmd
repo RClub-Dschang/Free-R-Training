@@ -1,7 +1,11 @@
 ---
 title: "The Basics of R Programming - D2"
-subtitle: "Online Workshop By R-Club University of Dschang & PytoCaR"
+subtitle: "Online Workshop By R-Club UDs & PytoCaR"
 author: Juluis Foyet
+execute:
+  message: false
+  warning: false
+  echo: false
 institute: University of Buea, Cameroon
 number-sections: true
 margin: 0.01
@@ -9,7 +13,6 @@ date: Feb 6, 2025
 date-format: "DD MMM YYYY"
 format:
   revealjs:
-    footer: The Basics of R Programming
     header: Juluis Foyet
     slide-number: true
     toc: true
@@ -22,28 +25,390 @@ format:
       data-background-opacity: "0.2"
 ---
 
+
+
 ```{r}
 library(gt)
 library(tidyverse)
 library(knitr)
 theme_set(theme_bw())
+library(gt)
 ```
 
 
 # Data Structure and Type
+
 ## Data Structure{.smaller}
 
 In R, there are many data structures, each supporting a certain number of operations.
 
-## Data Type
+### Vectors
 
-# Packages
+1-D objects with items of the same type.
+
+**e.g.**
+```{r}
+glyc <- c(1.01, 0.83, 1.05, 1.15, 0.99, 1.02, 1.07, 1.00, 1.19, 0.96, 1.05, 1.12, 0.94, 0.96, 0.81, 0.81, 0.83, 1.18, 1.20, 1.15)
+
+status <- c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE,  TRUE,  TRUE, TRUE,  TRUE, TRUE, TRUE)
+```
+
+```{r}
+#| echo: true
+print(glyc)
+class(glyc)
+print(status)
+class(status)
+```
+
+### Matrices
+
+A matrix is a 2-D object with items of the same type.
+
+**e.g.**
+
+```{r}
+mat1 <- matrix(c(34, 29, 76, 87), nrow = 2, byrow = T)
+mat2 <- mat1
+dimnames(mat2) <- list(Sex = c("Male", "Female"), Disease_status = c("Infected", "NonInfected"))
+```
+
+:::{.columns}
+
+::::{.column}
+
+```{r}
+#| echo: true
+print(mat1)
+class(mat1)
+```
+
+
+::::
+
+::::{.column}
+
+```{r}
+#| echo: true
+print(mat2)
+```
+
+::::
+
+:::
+
+### Arrays
+
+n-D object with items of the same type
+
+**e.g.** Disease status and sleeping time in pregnant and non-pregnant women
+
+| Status   | Before 10 | 10 and later | Before 10 | 10 and later |
+|----------|:----------|:------------:|:---------:|:------------:|
+| Positive |   12      |    32        |   25      |    36        |
+| Negative |   35      |    58        |   80      |    62        |
+
+```{r}
+MyArray <- array(c(12,35,32,58,25,80,36,62), dim = c(2,2,2))
+
+dimnames(MyArray) <- list(Disease_status = c("Positive", "Negative"),
+                          Sleeping_time = c("Before 10", "10 and later"),
+                          Pregnancy = c("Pregnant", "No-Pregnant"))
+```
+
+R will display the same array as follows:
+
+```{r}
+#| echo: true
+print(MyArray)
+class(MyArray)
+```
+
+### Data frames / Tibbles
+
+2-D objects with column that can assume different data types.
+
+**e.g.**
+
+:::{.columns}
+
+::::{.column width="32%"}
+
+```{r}
+#| echo: true
+head(iris[,3:5])
+```
+
+::::
+
+::::{.column width="68%"}
+
+```{r}
+#| echo: true
+glimpse(iris) # glimpse function found under the package {dplyr}
+```
+
+::::
+
+:::
+
+```{r}
+#| echo: true
+class(iris)
+```
+
+:::{.callout-warning}
+Tibbles?
+:::
+
+
+### Lists
+ A list is an object that can contain any other type of object, including other lists (therefore referred to as recursive objects).
+ 
+ **e.g.**
+ 
+```{r}
+MyList <- list(glyc = glyc, status = status, mat2 = mat2, MyArray = MyArray, iris = iris[1:10,])
+```
+
+```{r}
+#| echo: true
+
+print(MyList)
+
+class(MyList)
+```
+
+:::{.callout-warning}
+Relevance of Lists?
+:::
+
+ 
+
+
+## Data Type{.smaller}
+:::{.columns}
+::::{.column}
+```{dot}
+//| label: fig-simple
+//| fig-cap: Types of data (Adapted from Bluman, 2023)
+//| fig-width: 5.2
+graph {
+  Variables -- Qualitative
+  Variables -- Quantitative
+  Quantitative -- Discrete
+  Quantitative -- Continuous
+}
+```
+::::
+
+::::{.column}
+
+:::{.callout-tip}
+##### Variables
+- Qualitative variables
+  * Categorical
+  * Ordinal
+  * Binary
+  * Boolean/logical
+  * Factor?
+
+- Quantitative variables
+  * Discrete
+  * continuous/double
+:::
+
+::::
+
+:::
+
+
+**e.g.** To obtain the data type in R, use the function `class(var)`, with `var` being the name of the variable.
+```{r}
+set.seed(62)
+
+bird_count <- sample(1:100, 10)
+status2 <- sample(c(0,1), 10, replace = T)
+quarter <- c("Bunduma", "Sandpit", "Molyko")
+quarter2 <- factor(quarter)
+educ <- factor(c("University", "Primary", "Secondary"),
+               levels = c("Primary", "Secondary", "University"), ordered = T)
+
+```
+
+
+| Variables  |  Preview             | Type                  |
+|------------|----------------------|:---------------------:|
+| quarter    |`r quarter`           |`r class(quarter)`     |
+| quarter2   |`r quarter2`          |`r class(quarter2)`    |
+| educ       |`r educ`              |`r class(educ)`        |
+| status     |`r status[1:4]`       |`r class(status)`      |
+| status2    |`r status2`           |`r class(status2)`     |
+| glyc       | `r glyc[1:6]`        | `r class(glyc)`       |
+| birds      | `r bird_count[1:8]`  | `r class(bird_count)` |
+
+**Assignment**: For each variable in the data frame below, determine the variable type.
+```{r}
+set.seed(62)
+data.frame(
+  ID = 1:14,
+  bmi = sample(seq(20.3, 50.1,.1), 14),
+  age = sample(1:68, 14),
+  height = sample(seq(157, 180.6,.1), 14),
+  weight = sample(seq(50, 119.8,.1), 14),
+  hh_size = sample(1:4, 14, replace = T),
+  h_employe = rep(c("Employee", "Self_employed", "Employee"), times = c(3,8,3)),
+  sex = sample(c("Male", "Female"), 14, replace = T)
+) |> 
+  gt()
+```
+
+
+
+# Packages{.smaller}
 
 ## Packages Definition
 
+**R packages** are a collection of R functions, compiled code and sample data.
+
+**R packages** enables users to perform some tasks/analyses in an easier way.
+
+Example of *mean standard error* and *geometric mean*?
+
+
+
+:::{.columns}
+
+::::{.column}
+![Diversity of packages](images/pckgs.jpg)
+::::
+
+::::{.column}
+- There are already 10k+ packages on CRAN.
+::::
+
+:::
+
+- **Some generic packages**: `readxl`, `tidyverse`, `nortest`, `DescTools`, `freqtables`, `foreign`, etc.
+- **Epidemiology**: `Epi` , `epibasix` , `epiDisplay` , `epiR`, `epitools`, etc.
+- **Biodiversity studies**: `BiodiversityR`, `vegan`, `iNEXT`, etc.
+- etc.
 
 ## Packages Installation
 
-## Packages Loading
+1. From CRAN
+
+```{r}
+#| eval: false
+#| echo: true
+install.packages("package_name")
+install.packages(c("package1", "package2", "packageN"))
+```
+
+
+2. Manual installation
+
+```{r}
+#| eval: false
+#| echo: true
+
+# After downloading the zip,
+install.packages(file_name_with_path, repos = NULL, type = "source") 
+# e.g. install the package named "XML“
+install.packages("E:/XML_3.98-1.3.zip", repos = NULL, type = "source") 
+```
+
+
+
+
+:::{.callout-warning}
+Dependencies and conflicts?
+:::
+
+**Assignment**: Copy and run the following code chunck
+
+```{r}
+#| eval: false
+#| echo: true
+
+install.packages(c("readxl", "tidyverse", "nortest",
+                   "DescTools", "freqtables", "foreign"))
+```
+
+## Working with Packages
+
+### Loading
+```{r}
+#| eval: false
+#| echo: true
+
+library(“package_name”) # or without quotes
+require(“package_name”) # or without quotes
+lapply(x, library, character.only = TRUE) # x being a vector of pckgs
+```
+
+
+
+### Getting citation of a package
+
+```{r}
+#| eval: false
+#| echo: true
+citation(“package_name”)
+```
+
+**e.g.**
+
+```{r}
+#| echo: true
+
+citation("ggplot2")
+```
+
+
+
+## Checking of loaded packages
+
+```{r}
+#| echo: true
+search()
+```
+
 
 ## Packages Documentation
+
+There are several ways to get help for a package:
+
+1. The official manual on CRAN website ([https://cran.r-project.org/](https://cran.r-project.org/))
+
+2. The package index
+```{r}
+#| eval: false
+#| echo: true
+help(package = "package_name")
+```
+
+3. Bonus
+
+```{r}
+#| eval: false
+#| echo: true
+apropos(“part_of_the_name”) # Useful when you are not sure
+                            # of the name of the function.
+```
+
+
+$MSE=\frac{SD}{\sqrt{n}}$
+
+
+```{r}
+library(DescTools)
+
+sd(glyc)/sqrt(length(glyc))
+MeanSE(glyc)
+
+exp(mean(log(glyc)))
+Gmean(glyc)
+
+```
+
