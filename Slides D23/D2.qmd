@@ -1,0 +1,47 @@
+---
+title: "The Basics of R Programming - D2"
+subtitle: "Online Workshop By R-Club University of Dschang & PytoCaR"
+author: Juluis Foyet
+institute: University of Buea, Cameroon
+number-sections: true
+margin: 0.01
+date: Feb 6, 2025
+date-format: "DD MMM YYYY"
+format:
+  revealjs:
+    footer: The Basics of R Programming
+    header: Juluis Foyet
+    slide-number: true
+    toc: true
+    toc-depth: 3
+    toc-title: Outline
+    scrollable: true
+    theme: dark
+    transition: fade
+    title-slide-attributes: 
+      data-background-opacity: "0.2"
+---
+
+```{r}
+library(gt)
+library(tidyverse)
+library(knitr)
+theme_set(theme_bw())
+```
+
+
+# Data Structure and Type
+## Data Structure 
+
+## Data Type
+
+# Packages
+
+## Packages Definition
+
+
+## Packages Installation
+
+## Packages Loading
+
+## Packages Documentation
