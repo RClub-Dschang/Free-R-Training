@@ -1,15 +1,19 @@
 ---
 title: "The Basics of R Programming - D3"
-subtitle: "Online Workshop By R-Club University of Dschang & PytoCaR"
+subtitle: "Online Workshop By R-Club UDs & PytoCaR"
 author: Juluis Foyet
+execute:
+  message: false
+  warning: false
+  echo: false
 institute: University of Buea, Cameroon
 number-sections: true
 margin: 0.01
-date: Feb 7, 2025
+date: Feb 8, 2025
 date-format: "DD MMM YYYY"
 format:
   revealjs:
-    footer: The Basics of R Programming
+    header: Juluis Foyet
     slide-number: true
     toc: true
     toc-depth: 3
@@ -24,12 +28,206 @@ format:
 ```{r}
 library(gt)
 library(tidyverse)
+library(foreign)
 library(knitr)
+library(readxl)
+library(DescTools)
+library(skimr)
 theme_set(theme_bw())
+```
+## The Working Directory?{.smaller}
+
+### Definition
+
+In simple terms, a `directory` a folder that can be made up of other files and folders.
+
+Programs in a computer often have default `folders/directories` where they often store (or retrieve) the files or folders that they generate while carrying out processes or operations within the program,  or prompt the user to select a location for them to store generated files and folders.
+
+In `R` and many other software, the default `folder/directory` is referred to as the `Working Directory`.
+
+### Seting the working directory
+1. Through code
+```{r}
+#| eval: false
+#| echo: true
+setwd("path") # path is the location of the folder
+
+Example of path: "C:/Users/visne/Desktop/RClub" # the "/" symbol can be replaced by "\\", never "\"
+```
+
+Some common symbol to know when specifying the path are:
+
+| Symbol | Meaning                                         |
+|:------:|-------------------------------------------------|
+| `.`    | The current directory                           |
+| `..`   | The parent directory                            |
+| `~`    | Home directory (the folder `Documents` for `R`) |
+
+See also `list.files()` in combination to `path`.
+
+
+2. Manually
+```{r}
+#| eval: false
+#| echo: true
+On the Menu bar, follow the steps:
+  
+Session > Set Working Directory > Choose Directory
 ```
 
 
 
-## Data Importation
 
-## Exploratory Data Analysis
+
+## Data Importation{.smaller}
+
+### CSV files
+
+For a user to import a CSV (Comma Separated Value) data in R, no package needs to be downloaded, because the package `{utils}` (loaded by default) contains the function `read.csv` to perform that task. Also take not of the function `read.csv2` from the same package. The package `{readr}` (in `{tidyverse}`) also contains the functions `read_csv` and `read_csv2`.
+
+```{r}
+#| echo: true
+#| warning: true
+#| message: true
+
+dbp <- read.csv("../data/DBP_Wide.csv", sep = ",", dec = ".", stringsAsFactors = T)
+class(dbp)
+
+library(readr)
+dbp2 <- read_csv("../data/DBP_Wide.csv")
+class(dbp2)
+```
+
+### Excel (.xls, xlsx) files
+To import excel files in R, one needs to load a package like `{readxl}` or `{openxlsx}`.
+```{r}
+#| echo: true
+
+library(readxl)
+
+gastritis <- read_excel("../data/gastritis_data2.xlsx", sheet = "Sheet1")
+class(gastritis)
+```
+
+### Data from other software (e.g. SPSS)
+
+For this, we need to load the package `{foreign}`, that contains function to read data files from `Minitab`, `S`, `SAS`, `SPSS`, `Stata`, `Systat`, `Weka`, `dBase`, etc.
+```{r}
+#| echo: true
+library(foreign)
+heart <- read.spss("../data/Heart_Disease.sav")
+class(heart)
+
+heart <- read.spss("../data/Heart_Disease.sav", to.data.frame = T)
+class(heart)
+```
+
+
+## Exploratory Data Analysis{.smaller}
+Below are a couple of functions one can use for data exploration. Note that because `R` is a `functional programming language`, the output of each function may vary based on the nature of the obejct the function is applied on.
+
+|  Function    | Output                                                          |
+|--------------|-----------------------------------------------------------------|
+| `head()`     | show the first 6 (unless specified otherwise) rows of data.     |
+| `tail()`     | Get the last 6 (unless specified otherwise) rows from our data. |
+| `dim()`      | Get the dimension of a dataset (number of rows and columns)     |
+| `nrow()`     | Get the number of rows of the dataset                           |
+| `ncol()`     | Get the number of columns of the dataset                        |
+| `names()`    | Get the names of the variables of a dataset                     |
+| `str()`      | Compactly Display the Structure of an Arbitrary R Object        |
+| `summary()`  | Summarises the data                                             |
+| `glimpse()`  | `{dplyr}` Get a glimpse of your data                            |
+| `skim()`     | `{skimr}` Skim a data frame, getting useful summary statistics  |
+
+
+**Application**
+```{r}
+#| echo: true
+head(dbp)
+tail(gastritis)
+dim(heart)
+nrow(dbp)
+ncol(gastritis)
+str(gastritis)
+summary(dbp)
+glimpse(gastritis)
+skim(dbp)
+```
+
+
+
+
+
+
+### Graphical Approach
+
+#### Histograms
+
+:::{#fig-box layout-ncol=2}
+
+```{r}
+#| fig-height: 7
+#| echo: true
+# 1st graph
+hist(dbp$DBP1, xlab = "Diatolic Blood Pressure (mmHg)", col = "white",
+     main = NA)
+```
+
+```{r}
+#| fig-height: 7
+#| echo: true
+# 2nd graph
+hist(dbp$DBP1, xlab = "Diatolic Blood Pressure (mmHg)", col = "white",
+     main = NA, probability = T)
+lines(density(dbp$DBP1), lwd = 2, col = "red") # lwd means line width
+```
+
+Examples of histogram
+:::
+
+#### Boxplots
+
+![Interpretation of the Boxplot](images/boxplot.png){width="70%"}
+
+:::{#fig-box layout-ncol=2}
+
+```{r}
+#| fig-height: 7
+#| echo: true
+# 1st graph
+boxplot(dbp$DBP1, ylab = "Diatolic Blood Pressure (mmHg)", col = "white")
+```
+
+```{r}
+#| fig-height: 7
+#| echo: true
+# 2nd graph
+boxplot(dbp$DBP1~dbp$TRT, main = "Diatolic Blood Pressure in Treatment (A) and Placebo (B) groups",
+        xlab = "Treatment Arms", ylab = "Diatolic Blood Pressure (mmHg)",
+        col = c("lightblue", "cyan"))
+```
+
+Examples of boxplots
+:::
+
+### Bonus
+
+```{r}
+#| echo: true
+#| eval: false
+# The argument `na.rm=T` is there to prevent unexpected outputs due to missing values in the data.
+mean(dbp$DBP1, na.rm = T) # Arithmetic mean
+MeanCI(dbp$DBP1, na.rm = T) # CI of the mean, under {DescTools}
+Gmean(dbp$DBP1, na.rm = T) # Geometric mean, under {DescTools}
+Median(dbp$DBP1, na.rm = T) # Median, under {DescTools}
+MedianCI(dbp$DBP1, na.rm = T) # CI of the median, under {DescTools}
+sd(dbp$DBP1, na.rm = T) # Arithmetic standard deviation
+Gsd(dbp$DBP1, na.rm = T) # Geometric sd, under {DescTools}
+var(dbp$DBP1, na.rm = T) # Variance
+range(dbp$DBP1, na.rm = T)
+min(dbp$DBP1, na.rm = T)
+max(dbp$DBP1, na.rm = T)
+quantile(dbp$DBP1, na.rm = T)
+quantile(dbp$DBP1, na.rm = T, .2) # 20% quantile.
+IQR(dbp$DBP1, na.rm = T) # Inter-quartile range (3rd Qrt - 1st Qurt)
+```

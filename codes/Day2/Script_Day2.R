@@ -15,6 +15,7 @@ plot(table(quarter2))
 # Create a vector of 20 logical values, randomly picked
 status <- sample(c(T, F), 20, replace = T)
 
+# Show the number of occurrences of each level of status
 table(status)
 
 # Gives the number of TRUE values, because TRUE is 1

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Juluis Foyet">
-  <meta name="dcterms.date" content="2025-02-07">
+  <meta name="dcterms.date" content="2025-02-08">
   <title>The Basics of R Programming - D3</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="D3_files/libs/revealjs/dist/theme/quarto.css">
   <link href="D3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -329,7 +394,7 @@
 
 <section id="title-slide" data-background-opacity="0.2" class="quarto-title-block center">
   <h1 class="title">The Basics of R Programming - D3</h1>
-  <p class="subtitle">Online Workshop By R-Club University of Dschang &amp; PytoCaR</p>
+  <p class="subtitle">Online Workshop By R-Club UDs &amp; PytoCaR</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -342,24 +407,566 @@ Juluis Foyet
     </div>
 </div>
 
-  <p class="date">07 Feb 2025</p>
+  <p class="date">08 Feb 2025</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Outline</h2>
 <ul>
-<li><a href="#/data-importation" id="/toc-data-importation"><span class="header-section-number">1</span> Data Importation</a></li>
-<li><a href="#/exploratory-data-analysis" id="/toc-exploratory-data-analysis"><span class="header-section-number">2</span> Exploratory Data Analysis</a></li>
+<li><a href="#/the-working-directory" id="/toc-the-working-directory"><span class="header-section-number">1</span> The Working Directory?</a>
+<ul>
+<li><a href="#/the-working-directory" id="/toc-definition"><span class="header-section-number">1.1</span> Definition</a></li>
+<li><a href="#/the-working-directory" id="/toc-seting-the-working-directory"><span class="header-section-number">1.2</span> Seting the working directory</a></li>
+</ul></li>
+<li><a href="#/data-importation" id="/toc-data-importation"><span class="header-section-number">2</span> Data Importation</a>
+<ul>
+<li><a href="#/data-importation" id="/toc-csv-files"><span class="header-section-number">2.1</span> CSV files</a></li>
+<li><a href="#/data-importation" id="/toc-excel-.xls-xlsx-files"><span class="header-section-number">2.2</span> Excel (.xls, xlsx) files</a></li>
+<li><a href="#/data-importation" id="/toc-data-from-other-software-e.g.-spss"><span class="header-section-number">2.3</span> Data from other software (e.g.&nbsp;SPSS)</a></li>
+</ul></li>
+<li><a href="#/exploratory-data-analysis" id="/toc-exploratory-data-analysis"><span class="header-section-number">3</span> Exploratory Data Analysis</a>
+<ul>
+<li><a href="#/exploratory-data-analysis" id="/toc-graphical-approach"><span class="header-section-number">3.1</span> Graphical Approach</a></li>
+<li><a href="#/exploratory-data-analysis" id="/toc-bonus"><span class="header-section-number">3.2</span> Bonus</a></li>
+</ul></li>
 </ul>
 </nav>
 </section>
-<section id="data-importation" class="slide level2" data-number="1">
-<h2><span class="header-section-number">1</span> Data Importation</h2>
+<section id="the-working-directory" class="slide level2 smaller scrollable" data-number="1">
+<h2><span class="header-section-number">1</span> The Working Directory?</h2>
+<h3 data-number="1.1" id="definition"><span class="header-section-number">1.1</span> Definition</h3>
+<p>In simple terms, a <code>directory</code> a folder that can be made up of other files and folders.</p>
+<p>Programs in a computer often have default <code>folders/directories</code> where they often store (or retrieve) the files or folders that they generate while carrying out processes or operations within the program, or prompt the user to select a location for them to store generated files and folders.</p>
+<p>In <code>R</code> and many other software, the default <code>folder/directory</code> is referred to as the <code>Working Directory</code>.</p>
+<h3 data-number="1.2" id="seting-the-working-directory"><span class="header-section-number">1.2</span> Seting the working directory</h3>
+<ol type="1">
+<li>Through code</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">setwd</span>(<span class="st">"path"</span>) <span class="co"># path is the location of the folder</span></span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a>Example of path<span class="sc">:</span> <span class="st">"C:/Users/visne/Desktop/RClub"</span> <span class="co"># the "/" symbol can be replaced by "\\", never "\"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Some common symbol to know when specifying the path are:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>.</code></td>
+<td>The current directory</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>..</code></td>
+<td>The parent directory</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>~</code></td>
+<td>Home directory (the folder <code>Documents</code> for <code>R</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>See also <code>list.files()</code> in combination to <code>path</code>.</p>
+<ol start="2" type="1">
+<li>Manually</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>On the Menu bar, follow the steps<span class="sc">:</span></span>
+<span id="cb2-2"><a href=""></a>  </span>
+<span id="cb2-3"><a href=""></a>Session <span class="sc">&gt;</span> Set Working Directory <span class="sc">&gt;</span> Choose Directory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="exploratory-data-analysis" class="slide level2" data-number="2">
-<h2><span class="header-section-number">2</span> Exploratory Data Analysis</h2>
+<section id="data-importation" class="slide level2 smaller" data-number="2">
+<h2><span class="header-section-number">2</span> Data Importation</h2>
+<h3 data-number="2.1" id="csv-files"><span class="header-section-number">2.1</span> CSV files</h3>
+<p>For a user to import a CSV (Comma Separated Value) data in R, no package needs to be downloaded, because the package <code>{utils}</code> (loaded by default) contains the function <code>read.csv</code> to perform that task. Also take not of the function <code>read.csv2</code> from the same package. The package <code>{readr}</code> (in <code>{tidyverse}</code>) also contains the functions <code>read_csv</code> and <code>read_csv2</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>dbp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/DBP_Wide.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">dec =</span> <span class="st">"."</span>, <span class="at">stringsAsFactors =</span> T)</span>
+<span id="cb3-2"><a href=""></a><span class="fu">class</span>(dbp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">library</span>(readr)</span>
+<span id="cb5-2"><a href=""></a>dbp2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/DBP_Wide.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 40 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): TRT, Sex
+dbl (7): Subject, DBP1, DBP2, DBP3, DBP4, DBP5, Age
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">class</span>(dbp2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame" </code></pre>
+</div>
+</div>
+<h3 data-number="2.2" id="excel-.xls-xlsx-files"><span class="header-section-number">2.2</span> Excel (.xls, xlsx) files</h3>
+<p>To import excel files in R, one needs to load a package like <code>{readxl}</code> or <code>{openxlsx}</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">library</span>(readxl)</span>
+<span id="cb9-2"><a href=""></a></span>
+<span id="cb9-3"><a href=""></a>gastritis <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"../data/gastritis_data2.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Sheet1"</span>)</span>
+<span id="cb9-4"><a href=""></a><span class="fu">class</span>(gastritis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+<h3 data-number="2.3" id="data-from-other-software-e.g.-spss"><span class="header-section-number">2.3</span> Data from other software (e.g.&nbsp;SPSS)</h3>
+<p>For this, we need to load the package <code>{foreign}</code>, that contains function to read data files from <code>Minitab</code>, <code>S</code>, <code>SAS</code>, <code>SPSS</code>, <code>Stata</code>, <code>Systat</code>, <code>Weka</code>, <code>dBase</code>, etc.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">library</span>(foreign)</span>
+<span id="cb11-2"><a href=""></a>heart <span class="ot">&lt;-</span> <span class="fu">read.spss</span>(<span class="st">"../data/Heart_Disease.sav"</span>)</span>
+<span id="cb11-3"><a href=""></a><span class="fu">class</span>(heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>heart <span class="ot">&lt;-</span> <span class="fu">read.spss</span>(<span class="st">"../data/Heart_Disease.sav"</span>, <span class="at">to.data.frame =</span> T)</span>
+<span id="cb13-2"><a href=""></a><span class="fu">class</span>(heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="slide level2 smaller" data-number="3">
+<h2><span class="header-section-number">3</span> Exploratory Data Analysis</h2>
+<p>Below are a couple of functions one can use for data exploration. Note that because <code>R</code> is a <code>functional programming language</code>, the output of each function may vary based on the nature of the obejct the function is applied on.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>head()</code></td>
+<td>show the first 6 (unless specified otherwise) rows of data.</td>
+</tr>
+<tr class="even">
+<td><code>tail()</code></td>
+<td>Get the last 6 (unless specified otherwise) rows from our data.</td>
+</tr>
+<tr class="odd">
+<td><code>dim()</code></td>
+<td>Get the dimension of a dataset (number of rows and columns)</td>
+</tr>
+<tr class="even">
+<td><code>nrow()</code></td>
+<td>Get the number of rows of the dataset</td>
+</tr>
+<tr class="odd">
+<td><code>ncol()</code></td>
+<td>Get the number of columns of the dataset</td>
+</tr>
+<tr class="even">
+<td><code>names()</code></td>
+<td>Get the names of the variables of a dataset</td>
+</tr>
+<tr class="odd">
+<td><code>str()</code></td>
+<td>Compactly Display the Structure of an Arbitrary R Object</td>
+</tr>
+<tr class="even">
+<td><code>summary()</code></td>
+<td>Summarises the data</td>
+</tr>
+<tr class="odd">
+<td><code>glimpse()</code></td>
+<td><code>{dplyr}</code> Get a glimpse of your data</td>
+</tr>
+<tr class="even">
+<td><code>skim()</code></td>
+<td><code>{skimr}</code> Skim a data frame, getting useful summary statistics</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Application</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">head</span>(dbp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Subject TRT DBP1 DBP2 DBP3 DBP4 DBP5 Age Sex
+1       1   A  114  115  113  109  105  43   F
+2       2   A  116  113  112  103  101  51   M
+3       3   A  119  115  113  104   98  48   F
+4       4   A  115  113  112  109  101  42   F
+5       5   A  116  112  107  104  105  49   M
+6       6   A  117  112  113  104  102  47   M</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">tail</span>(gastritis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+    age quarter      gastr_status
+  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       
+1    17 Bomaka       Positive    
+2    26 Mayor Street Positive    
+3    24 Sandpit      Negative    
+4    22 Molyko       Negative    
+5    21 Sandpit      Positive    
+6    18 Bomaka       Positive    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">dim</span>(heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1025   14</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">nrow</span>(dbp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">ncol</span>(gastritis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">str</span>(gastritis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [132 × 3] (S3: tbl_df/tbl/data.frame)
+ $ age         : num [1:132] 20 30 25 17 24 21 16 20 30 24 ...
+ $ quarter     : chr [1:132] "Sandpit" "Molyko" "Mayor Street" "Mayor Street" ...
+ $ gastr_status: chr [1:132] "Negative" "Negative" "Positive" "Positive" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">summary</span>(dbp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Subject      TRT         DBP1            DBP2            DBP3      
+ Min.   : 1.00   A:20   Min.   :114.0   Min.   :111.0   Min.   :100.0  
+ 1st Qu.:10.75   B:20   1st Qu.:115.0   1st Qu.:113.0   1st Qu.:112.0  
+ Median :20.50          Median :116.5   Median :115.0   Median :113.0  
+ Mean   :20.50          Mean   :116.7   Mean   :114.3   Mean   :112.4  
+ 3rd Qu.:30.25          3rd Qu.:118.0   3rd Qu.:115.0   3rd Qu.:113.0  
+ Max.   :40.00          Max.   :121.0   Max.   :119.0   Max.   :118.0  
+      DBP4            DBP5            Age        Sex   
+ Min.   :102.0   Min.   : 97.0   Min.   :38.00   F:18  
+ 1st Qu.:106.8   1st Qu.:101.8   1st Qu.:42.00   M:22  
+ Median :109.0   Median :106.5   Median :48.00         
+ Mean   :109.3   Mean   :106.7   Mean   :47.83         
+ 3rd Qu.:113.2   3rd Qu.:112.0   3rd Qu.:51.25         
+ Max.   :117.0   Max.   :115.0   Max.   :63.00         </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">glimpse</span>(gastritis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 132
+Columns: 3
+$ age          &lt;dbl&gt; 20, 30, 25, 17, 24, 21, 16, 20, 30, 24, 27, 26, 19, 21, 1…
+$ quarter      &lt;chr&gt; "Sandpit", "Molyko", "Mayor Street", "Mayor Street", "Mol…
+$ gastr_status &lt;chr&gt; "Negative", "Negative", "Positive", "Positive", "Negative…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">skim</span>(dbp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">dbp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 20%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">ordered</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: left;">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">TRT</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">A: 20, B: 20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sex</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">M: 22, F: 18</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Subject</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20.50</td>
+<td style="text-align: right;">11.69</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">10.75</td>
+<td style="text-align: right;">20.5</td>
+<td style="text-align: right;">30.25</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DBP1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">116.65</td>
+<td style="text-align: right;">2.03</td>
+<td style="text-align: right;">114</td>
+<td style="text-align: right;">115.00</td>
+<td style="text-align: right;">116.5</td>
+<td style="text-align: right;">118.00</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: left;">▇▅▇▂▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DBP2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">114.35</td>
+<td style="text-align: right;">1.83</td>
+<td style="text-align: right;">111</td>
+<td style="text-align: right;">113.00</td>
+<td style="text-align: right;">115.0</td>
+<td style="text-align: right;">115.00</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: left;">▃▅▇▁▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DBP3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">112.38</td>
+<td style="text-align: right;">3.05</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">112.00</td>
+<td style="text-align: right;">113.0</td>
+<td style="text-align: right;">113.00</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: left;">▁▁▂▇▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DBP4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">109.35</td>
+<td style="text-align: right;">4.02</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">106.75</td>
+<td style="text-align: right;">109.0</td>
+<td style="text-align: right;">113.25</td>
+<td style="text-align: right;">117</td>
+<td style="text-align: left;">▅▂▇▅▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DBP5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">106.65</td>
+<td style="text-align: right;">5.82</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">101.75</td>
+<td style="text-align: right;">106.5</td>
+<td style="text-align: right;">112.00</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: left;">▃▇▁▆▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">47.83</td>
+<td style="text-align: right;">6.65</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">42.00</td>
+<td style="text-align: right;">48.0</td>
+<td style="text-align: right;">51.25</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: left;">▇▆▆▃▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3 data-number="3.1" id="graphical-approach"><span class="header-section-number">3.1</span> Graphical Approach</h3>
+<h4 data-number="3.1.1" id="histograms"><span class="header-section-number">3.1.1</span> Histograms</h4>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="co"># 1st graph</span></span>
+<span id="cb32-2"><a href=""></a><span class="fu">hist</span>(dbp<span class="sc">$</span>DBP1, <span class="at">xlab =</span> <span class="st">"Diatolic Blood Pressure (mmHg)"</span>, <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb32-3"><a href=""></a>     <span class="at">main =</span> <span class="cn">NA</span>)</span>
+<span id="cb32-4"><a href=""></a><span class="co"># 2nd graph</span></span>
+<span id="cb32-5"><a href=""></a><span class="fu">hist</span>(dbp<span class="sc">$</span>DBP1, <span class="at">xlab =</span> <span class="st">"Diatolic Blood Pressure (mmHg)"</span>, <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb32-6"><a href=""></a>     <span class="at">main =</span> <span class="cn">NA</span>, <span class="at">probability =</span> T)</span>
+<span id="cb32-7"><a href=""></a><span class="fu">lines</span>(<span class="fu">density</span>(dbp<span class="sc">$</span>DBP1), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>) <span class="co"># lwd means line width</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-box" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="D3_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="D3_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Examples of histogram
+</figcaption>
+</figure>
+</div>
+<h4 data-number="3.1.2" id="boxplots"><span class="header-section-number">3.1.2</span> Boxplots</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/boxplot.png" style="width:70.0%"></p>
+<figcaption>Interpretation of the Boxplot</figcaption>
+</figure>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="co"># 1st graph</span></span>
+<span id="cb33-2"><a href=""></a><span class="fu">boxplot</span>(dbp<span class="sc">$</span>DBP1, <span class="at">ylab =</span> <span class="st">"Diatolic Blood Pressure (mmHg)"</span>, <span class="at">col =</span> <span class="st">"white"</span>)</span>
+<span id="cb33-3"><a href=""></a><span class="co"># 2nd graph</span></span>
+<span id="cb33-4"><a href=""></a><span class="fu">boxplot</span>(dbp<span class="sc">$</span>DBP1<span class="sc">~</span>dbp<span class="sc">$</span>TRT, <span class="at">main =</span> <span class="st">"Diatolic Blood Pressure in Treatment (A) and Placebo (B) groups"</span>,</span>
+<span id="cb33-5"><a href=""></a>        <span class="at">xlab =</span> <span class="st">"Treatment Arms"</span>, <span class="at">ylab =</span> <span class="st">"Diatolic Blood Pressure (mmHg)"</span>,</span>
+<span id="cb33-6"><a href=""></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"lightblue"</span>, <span class="st">"cyan"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-box" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="D3_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="D3_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples of boxplots
+</figcaption>
+</figure>
+</div>
+<h3 data-number="3.2" id="bonus"><span class="header-section-number">3.2</span> Bonus</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># The argument `na.rm=T` is there to prevent unexpected outputs due to missing values in the data.</span></span>
+<span id="cb34-2"><a href=""></a><span class="fu">mean</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># Arithmetic mean</span></span>
+<span id="cb34-3"><a href=""></a><span class="fu">MeanCI</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># CI of the mean, under {DescTools}</span></span>
+<span id="cb34-4"><a href=""></a><span class="fu">Gmean</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># Geometric mean, under {DescTools}</span></span>
+<span id="cb34-5"><a href=""></a><span class="fu">Median</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># Median, under {DescTools}</span></span>
+<span id="cb34-6"><a href=""></a><span class="fu">MedianCI</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># CI of the median, under {DescTools}</span></span>
+<span id="cb34-7"><a href=""></a><span class="fu">sd</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># Arithmetic standard deviation</span></span>
+<span id="cb34-8"><a href=""></a><span class="fu">Gsd</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># Geometric sd, under {DescTools}</span></span>
+<span id="cb34-9"><a href=""></a><span class="fu">var</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># Variance</span></span>
+<span id="cb34-10"><a href=""></a><span class="fu">range</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T)</span>
+<span id="cb34-11"><a href=""></a><span class="fu">min</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T)</span>
+<span id="cb34-12"><a href=""></a><span class="fu">max</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T)</span>
+<span id="cb34-13"><a href=""></a><span class="fu">quantile</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T)</span>
+<span id="cb34-14"><a href=""></a><span class="fu">quantile</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T, .<span class="dv">2</span>) <span class="co"># 20% quantile.</span></span>
+<span id="cb34-15"><a href=""></a><span class="fu">IQR</span>(dbp<span class="sc">$</span>DBP1, <span class="at">na.rm =</span> T) <span class="co"># Inter-quartile range (3rd Qrt - 1st Qurt)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>The Basics of R Programming</p>
+
 </div>
 </div>
 </section>

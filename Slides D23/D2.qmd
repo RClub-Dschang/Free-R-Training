@@ -275,6 +275,19 @@ data.frame(
 
 Example of *mean standard error* and *geometric mean*?
 
+```{r}
+#| echo: true
+library(DescTools)
+
+# Mean Standard Error
+sd(glyc)/sqrt(length(glyc)) # Without a package
+MeanSE(glyc)  # With a package
+
+# Geometric mean
+exp(mean(log(glyc)))  # With a package
+Gmean(glyc)     # With a package
+```
+
 
 
 :::{.columns}
@@ -396,19 +409,3 @@ help(package = "package_name")
 apropos(“part_of_the_name”) # Useful when you are not sure
                             # of the name of the function.
 ```
-
-
-$MSE=\frac{SD}{\sqrt{n}}$
-
-
-```{r}
-library(DescTools)
-
-sd(glyc)/sqrt(length(glyc))
-MeanSE(glyc)
-
-exp(mean(log(glyc)))
-Gmean(glyc)
-
-```
-
